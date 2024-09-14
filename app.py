@@ -113,12 +113,3 @@ def update_item(item_id):
     abort(400, message=f"Item not found.")
 
 
-
-@app.delete("/items/<string:item_id>")
-def delete__item_data2(item_id):
-  try:
-    del items[item_id]
-    return {"message":"Item deleted"}
-  except KeyError: 
-    abort(404, message="Item not found")
-  
