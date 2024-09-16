@@ -4,11 +4,12 @@ import os
 
 from db import db
 import models
+from flask_jwt_extended import JWTManager
 
 from database.item import blp as ItemBlueprint
 from database.store import blp as StoreBlueprint
-
-
+from database.tag import blp as TagBluePrint
+from database.user import blp as UserBluePrint
 
 def create_app(db_url= None):
   app = Flask(__name__)
@@ -26,10 +27,18 @@ def create_app(db_url= None):
 
   api = Api(app)
 
+
+  app.config["JWT_SECRET_KEY"] = "3406857207503645503"
+  jwt = JWTManager(app)
+
+
+
   with app.app_context():
     db.create_all()
 
   api.register_blueprint(ItemBlueprint)
   api.register_blueprint(StoreBlueprint)
+  api.register_blueprint(TagBluePrint)
+  api.register_blueprint(UserBluePrint)
   
   return app
