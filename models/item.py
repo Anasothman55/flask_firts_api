@@ -10,6 +10,6 @@ class ItemModel(db.Model):
   store_id = db.Column(db.Integer, db.ForeignKey("stores.id"), unique=False, nullable = False)
   
   store = db.relationship("StoreModel", back_populates="items")
-  tag = db.relationship("TagModel", back_populates="items", secondary = "item_tags")
+  tags = db.relationship("TagModel", back_populates="items", secondary = "item_tags")
 
 
